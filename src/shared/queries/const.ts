@@ -1,0 +1,1 @@
+export const QUERY_TOKENS_METADATA_LIMIT = 120;

@@ -1,0 +1,21 @@
+.step {
+  .stepData {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    h4,
+    p {
+      margin: 0;
+    }
+
+    p {
+      font-style: italic;
+      font-size: medium;
+    }
+
+    .link {
+      font-size: small;
+    }
+  }
+}

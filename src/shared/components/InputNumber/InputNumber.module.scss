@@ -1,0 +1,18 @@
+.inputNumber {
+  padding: 6px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background-color: #f7fafc;
+  color: #2d3748;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: #805ad5;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.2);
+  }
+
+  &::placeholder {
+    color: #a0aec0;
+  }
+}

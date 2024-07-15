@@ -1,0 +1,11 @@
+.tokenWithLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  img {
+    width: 15px;
+    border-radius: 50%;
+  }
+}

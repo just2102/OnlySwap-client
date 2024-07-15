@@ -1,0 +1,25 @@
+.activity {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .txs {
+    .tx {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+
+      .tokensInfo,
+      .feeInfo {
+        display: flex;
+        justify-content: center;
+        gap: 4px;
+        margin: 4px;
+      }
+    }
+  }
+}

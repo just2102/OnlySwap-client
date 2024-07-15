@@ -1,0 +1,37 @@
+.coin {
+  width: 100%;
+}
+
+.coinButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: end;
+}
+
+.nameAndSymbol {
+  display: flex;
+  flex-direction: column;
+
+  .name {
+    font-size: smaller;
+  }
+
+  .symbolAndLink {
+    display: flex;
+    justify-content: flex-end;
+    gap: 3px;
+  }
+
+  .symbol {
+    font-size: x-small;
+    color: #a3a3a3;
+  }
+}
+
+.coinLogo {
+  width: 30px;
+  border-radius: 50%;
+}
