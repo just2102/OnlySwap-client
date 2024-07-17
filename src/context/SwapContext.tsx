@@ -19,7 +19,7 @@ import { formatBalance, fromReadableAmount } from "src/shared/utils/balance";
 import { d } from "src/shared/utils/conversion";
 import { ContractFunctionExecutionError, encodeFunctionData, erc20Abi, fromHex } from "viem";
 import { readContract, sendTransaction } from "viem/actions";
-import { useAccount, useBlockNumber, useClient } from "wagmi";
+import { useAccount, useClient } from "wagmi";
 
 import { createTrade } from "./utils/createTrade";
 import { fetchAllTokensMetadata } from "./utils/fetchAllTokensMetadata";
@@ -89,8 +89,6 @@ export const SwapContext = createContext<SwapContextValue>(defaultContextValue);
 export const SwapProvider = ({ children }: { children: React.ReactNode }) => {
   const { address: account, chainId } = useAccount();
   const client = useClient();
-  const { data: blockNumber } = useBlockNumber({ watch: true });
-  const [nativeBalanceReadable, setNativeBalanceReadable] = useState<string>("");
 
   const [availableTokens, setAvailableTokens] = useState<TokenRaw[]>([]);
   const [initialDisplayedTokens, setInitialDisplayedTokens] = useState<TokenWithMetadata[]>([]);
