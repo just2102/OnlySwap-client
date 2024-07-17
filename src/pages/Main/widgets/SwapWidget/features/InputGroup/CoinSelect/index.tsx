@@ -69,7 +69,6 @@ const CoinSelect = ({ selectedCoin, handleTokenChange }: CoinSelectProps) => {
                 <Skeleton
                   key={index}
                   variant='rounded'
-                  width={285}
                   height={40}
                   className={styles.coinSkeleton}
                 />
