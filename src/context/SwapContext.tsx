@@ -156,13 +156,12 @@ export const SwapProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const amountToWrap = d(fromReadableAmount(eth, ETH_DECIMALS_DEFAULT).toString()).minus(d(wETHBalance.toString()));
         const value = amountToWrap.toHex() as `0x${string}`;
-        const hash = await sendTransaction(walletClient, {
+        await sendTransaction(walletClient, {
           account: account,
           to: WETH_CONTRACT_ADDRESS,
           value: fromHex(value, "bigint"),
         });
 
-        console.log("wrap eth hash: ", hash);
         setWrapSuccess(true);
       } catch (err) {
         console.error("Error wrapping ETH: ", err);

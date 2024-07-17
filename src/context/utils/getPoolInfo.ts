@@ -13,7 +13,6 @@ export async function getPoolInfo(client: Client, chainId: number, fromToken: To
       fee: poolFee,
       chainId: chainId,
     });
-    console.log("currentPoolAddress", currentPoolAddress);
 
     const poolContract = getContract({
       abi: IUniswapV3PoolABI.abi,

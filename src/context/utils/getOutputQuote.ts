@@ -14,17 +14,21 @@ export async function getOutputQuote(
   parsedFromAmount: string,
   tradeType: TradeType,
 ) {
-  const { calldata } = SwapQuoter.quoteCallParameters(swapRoute, CurrencyAmount.fromRawAmount(fromToken, parsedFromAmount), tradeType, {
-    useQuoterV2: true,
-  });
-  console.log("calldata: ", calldata);
+  try {
+    const { calldata } = SwapQuoter.quoteCallParameters(swapRoute, CurrencyAmount.fromRawAmount(fromToken, parsedFromAmount), tradeType, {
+      useQuoterV2: true,
+    });
+    if (!calldata) throw new Error("Failed to get quote: no calldata");
 
-  const quoteCallReturnData = await simulateContract(wagmiConfig, {
-    abi: Quoter.abi,
-    functionName: "quoteExactInputSingle",
-    address: getQuoterAddress(chainId),
-    args: [fromToken.address, toToken.address, fee, parsedFromAmount, 0],
-  });
+    const quoteCallReturnData = await simulateContract(wagmiConfig, {
+      abi: Quoter.abi,
+      functionName: "quoteExactInputSingle",
+      address: getQuoterAddress(chainId),
+      args: [fromToken.address, toToken.address, fee, parsedFromAmount, 0],
+    });
 
-  return quoteCallReturnData.result as bigint;
+    return quoteCallReturnData.result as bigint;
+  } catch (err) {
+    throw new Error(`Failed to get quote: ${err}`);
+  }
 }

@@ -15,7 +15,6 @@ const ConnectWallet = () => {
     connect({ connector });
     setModalOpen(false);
   };
-  console.log("connectors: ", connectors);
 
   const filteredAndSortedConnectors = useMemo(() => {
     return connectors
