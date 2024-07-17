@@ -5,6 +5,7 @@ import { SwapContext } from "src/context/SwapContext";
 import { useBlockNumber } from "wagmi";
 
 import InputGroup from "./features/InputGroup";
+import SwapButton from "./features/SwapButton";
 import SwapInfoModal from "./features/SwapInfoModal";
 import styles from "./SwapWidget.module.scss";
 
@@ -24,7 +25,6 @@ const SwapWidget = () => {
     handleAmountOutChange,
     getQuote,
     handleSwap,
-    interactionDisabled,
   } = useContext(SwapContext);
 
   const prevFromToken = useRef(fromToken);
@@ -86,12 +86,7 @@ const SwapWidget = () => {
         handleAmountChange={handleAmountOutChange}
       />
 
-      <button
-        onClick={handleSwapButtonClick}
-        disabled={interactionDisabled}
-      >
-        Swap
-      </button>
+      <SwapButton handleClick={handleSwapButtonClick} />
 
       <SwapInfoModal
         isOpen={infoModalOpen}

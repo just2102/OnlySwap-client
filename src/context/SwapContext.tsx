@@ -304,7 +304,6 @@ export const SwapProvider = ({ children }: { children: React.ReactNode }) => {
         data: customCalldata,
       });
 
-      console.log("swap tx hash: ", hash);
       storeTx(hash, fromToken, toToken, amountIn, amountOut, "0", "ETH"); // todo: get fee amount and token
       setSwapSuccessTx(hash);
     } catch (err) {
@@ -313,7 +312,7 @@ export const SwapProvider = ({ children }: { children: React.ReactNode }) => {
     } finally {
       setInteractionDisabled(false);
     }
-  }, [account, amountIn, amountOut, chainId, client, fromToken, handleApprove, poolFee, toToken]);
+  }, [account, amountIn, amountOut, chainId, client, fromToken, handleApprove, poolFee, toToken, wrapETHIfNeeded]);
 
   useEffect(() => {
     const fetchBalance = async () => {

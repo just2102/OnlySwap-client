@@ -1,0 +1,7 @@
+.swapButton {
+  background-color: rgb(249, 249, 249);
+
+  &:disabled {
+    background-color: rgb(249, 249, 249, 0.5);
+  }
+}
