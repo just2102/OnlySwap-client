@@ -1,7 +1,7 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { Drawer } from "@mui/material";
-import { SwapContext } from "src/context/SwapContext";
+import NativeBalance from "src/shared/components/NativeBalance";
 import { truncateAddress } from "src/shared/utils/address";
 import { useAccount } from "wagmi";
 
@@ -11,8 +11,8 @@ import styles from "./Profile.module.scss";
 import DisconnectWallet from "../Connection/DisconnectWallet";
 
 const Profile = () => {
-  const { address, status, chain } = useAccount();
-  const { nativeBalanceReadable } = useContext(SwapContext);
+  const { address, status } = useAccount();
+
   const [showActivity, setShowActivity] = useState(false);
 
   const onActivityToggle = useCallback(() => {
@@ -23,17 +23,13 @@ const Profile = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.profile}>
         <button
-          className={styles.button}
+          className={styles.profileButton}
           onClick={onActivityToggle}
         >
           {truncateAddress(address)}
         </button>
-
-        <div className={styles.balance}>
-          {nativeBalanceReadable} {chain?.nativeCurrency.symbol}
-        </div>
       </div>
 
       <Drawer
@@ -43,6 +39,7 @@ const Profile = () => {
       >
         <div className={styles.drawerContent}>
           <DisconnectWallet />
+          <NativeBalance />
           <Activity />
         </div>
       </Drawer>

@@ -18,7 +18,7 @@ import { getQuoterAddress, getSwapRouterAddress } from "src/shared/utils/address
 import { formatBalance, fromReadableAmount } from "src/shared/utils/balance";
 import { d } from "src/shared/utils/conversion";
 import { ContractFunctionExecutionError, encodeFunctionData, erc20Abi, fromHex } from "viem";
-import { getBalance, readContract, sendTransaction } from "viem/actions";
+import { readContract, sendTransaction } from "viem/actions";
 import { useAccount, useBlockNumber, useClient } from "wagmi";
 
 import { createTrade } from "./utils/createTrade";
@@ -29,7 +29,6 @@ import { getTokenTransferApproval } from "./utils/getTokenTransferApproval";
 import { storeTx } from "../shared/storage/storeTx";
 
 interface SwapContextValue {
-  nativeBalanceReadable: string;
   availableTokens: TokenRaw[];
   initialDisplayedTokens: TokenWithMetadata[];
 
@@ -58,7 +57,6 @@ interface SwapContextValue {
 }
 
 const defaultContextValue: SwapContextValue = {
-  nativeBalanceReadable: "",
   availableTokens: [],
   initialDisplayedTokens: [],
 
@@ -315,20 +313,6 @@ export const SwapProvider = ({ children }: { children: React.ReactNode }) => {
   }, [account, amountIn, amountOut, chainId, client, fromToken, handleApprove, poolFee, toToken, wrapETHIfNeeded]);
 
   useEffect(() => {
-    const fetchBalance = async () => {
-      if (!account) return;
-
-      const balance = await getBalance(walletClient, {
-        address: account,
-      });
-
-      setNativeBalanceReadable(formatBalance(balance, ETH_DECIMALS_DEFAULT));
-    };
-
-    fetchBalance();
-  }, [account, blockNumber, chainId, client]);
-
-  useEffect(() => {
     const getTokenList = async () => {
       if (!chainId) return;
 
@@ -355,7 +339,6 @@ export const SwapProvider = ({ children }: { children: React.ReactNode }) => {
   }, [availableTokens, chainId]);
 
   const contextValue: SwapContextValue = {
-    nativeBalanceReadable,
     availableTokens,
     initialDisplayedTokens,
 

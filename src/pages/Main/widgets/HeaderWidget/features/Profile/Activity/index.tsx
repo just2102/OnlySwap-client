@@ -17,7 +17,7 @@ const Activity = () => {
     <div className={styles.activity}>
       <div className={styles.header}>
         <h4>Activity</h4>
-        <button onClick={handleClearTxs}>Clear</button>
+        {transactions?.length ? <button onClick={handleClearTxs}>Clear</button> : null}
       </div>
       <div className={styles.txs}>
         {transactions?.map((tx) => (
